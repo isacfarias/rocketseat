@@ -1,4 +1,4 @@
-Projeto feito no workshop doWhile 2020 ministrado por Elder moraes (@elderjava)
+Projeto feito no workshop doWhile 2020 ministrado por **Elder moraes** (@elderjava)
 
 aplicando os Design Patterns<br/>
 
