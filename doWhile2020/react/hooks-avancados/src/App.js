@@ -7,15 +7,23 @@ import { fetchGithubUser } from "./userService";
 const UserInfo = ({ userName }) => {
   const [user, setUser] = React.useState(null);
   const [error, setError] = React.useState(null);
+  const [status, setStatus] = React.useState('idle');
 
   React.useEffect(() => {
     if (!userName) return;
+    
+    setUser(null);
+    setError(null);
+    setStatus('penddig');
+
     return fetchGithubUser(userName).then(
       (userData) => {
-          setUser(userData)
+          setUser(userData);
+          setStatus('resolved');
       },
       (error) => {
-        setError(error)
+        setError(error);
+        setStatus('rejected');
       });
 
   }, [userName]);
