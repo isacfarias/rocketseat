@@ -1,9 +1,20 @@
 import * as React from "react";
 import { UserFallback } from "./components/UserFallback";
-import { UserErrorBoundary, UserForm } from "./components/UserForm";
+import { UserForm } from "./components/UserForm";//UserErrorBoundary, 
 import { UserView } from "./components/UserView";
+import { fetchGithubUser } from "./userService";
 
 const UserInfo = ({ userName }) => {
+  const [user, setUser] = React.useState(null);
+
+  React.useEffect(() => {
+    if (!userName) return;
+    return fetchGithubUser(userName)
+              .then((userData) => {
+                setUser(userData)
+              });
+
+  }, [userName]);
 
   if (!userName) {
     return "Submit user";
