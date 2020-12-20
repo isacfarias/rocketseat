@@ -4,26 +4,48 @@ import {  UserForm } from "./components/UserForm";
 import { UserView } from "./components/UserView";
 import { fetchGithubUser } from "./userService";
 
+const REQUEST_STATUS = {
+  IDLE:"idle",
+  PENDING:"penddig",
+  RESOLVED:"resolved",
+  REJECTED:"rejected"
+};
+
+const useReducer = (state, action) => {
+  
+  switch (action.type) {
+    case '':
+      break;
+
+    default:
+      break;
+  }
+};
+
 const UserInfo = ({ userName }) => {
-  const [user, setUser] = React.useState(null);
-  const [error, setError] = React.useState(null);
-  const [status, setStatus] = React.useState('idle');
+
+  
+  const [state, setState] = React.useState({
+    status: userName ? "penddig" : "idle",
+    user: null,
+    error: null
+  });
+
+  const [state, dispatch]  = React.useReducer(reducer, initalState);
+
+  const { status, user, error } = state;
 
   React.useEffect(() => {
     if (!userName) return;
     
-    setUser(null);
-    setError(null);
-    setStatus('penddig');
+    setState({state: "penddig"});
 
     return fetchGithubUser(userName).then(
       (userData) => {
-          setUser(userData);
-          setStatus('resolved');
+        setState({state: "resolved", user:userData});
       },
       (error) => {
-        setError(error);
-        setStatus('rejected');
+        setState({state: "rejected", error:error});
       });
 
   }, [userName]);
