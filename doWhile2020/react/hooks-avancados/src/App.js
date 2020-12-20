@@ -1,8 +1,18 @@
 import * as React from "react";
-import { UserForm } from "./components/UserForm";
+import { UserFallback } from "./components/UserFallback";
+import { UserErrorBoundary, UserForm } from "./components/UserForm";
+import { UserView } from "./components/UserView";
 
 const UserInfo = ({ userName }) => {
-  return <h1>Start here </h1>;
+
+  if (!userName) {
+    return "Submit user";
+  } else if (!user) {
+    return <UserFallback userName={userName} />
+  } else {
+     return <UserView user={user} />
+  }
+
 };
 
 const UserSection = ({ onSelect, userName }) => (

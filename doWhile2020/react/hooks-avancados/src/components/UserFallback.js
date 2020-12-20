@@ -1,7 +1,7 @@
 import * as React from "react";
 import { UserView } from "./UserView";
 
-export const UserFalback = ({ userName }) => {
+export const UserFallback = ({ userName }) => {
   const initialName = React.useRef(userName).current;
   const fallbackData = {
     followers: 0,
@@ -13,3 +13,4 @@ export const UserFalback = ({ userName }) => {
 
   return <UserView user={fallbackData} />;
 };
+
