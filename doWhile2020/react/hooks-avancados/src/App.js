@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import { UserForm } from "./components/UserForm";
 
-function App() {
+const UserInfo = ({ userName }) => {
+  return <h1>Start here </h1>;
+};
+
+const UserSection = ({ onSelect, userName }) => (
+  <div>
+    <div className="flex justify-center ">
+      <UserInfo userName={userName} />
+    </div>
+  </div>
+);
+
+const App = () => {
+  const [userName, setUserName] = React.useState(null);
+  const handleSubmit = (newUserName) => setUserName(newUserName);
+  const handleSelect = (newUserName) => setUserName(newUserName);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <UserForm userName={userName} onSubmit={handleSubmit} />
+      <hr />
+      <div className="m-4">
+        <UserSection onSelect={handleSelect} userName={userName} />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
