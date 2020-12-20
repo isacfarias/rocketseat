@@ -1,22 +1,32 @@
 import * as React from "react";
 import { UserFallback } from "./components/UserFallback";
-import { UserForm } from "./components/UserForm";//UserErrorBoundary, 
+import {  UserForm } from "./components/UserForm";
 import { UserView } from "./components/UserView";
 import { fetchGithubUser } from "./userService";
 
 const UserInfo = ({ userName }) => {
   const [user, setUser] = React.useState(null);
+  const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
     if (!userName) return;
-    return fetchGithubUser(userName)
-              .then((userData) => {
-                setUser(userData)
-              });
+    return fetchGithubUser(userName).then(
+      (userData) => {
+          setUser(userData)
+      },
+      (error) => {
+        setError(error)
+      });
 
   }, [userName]);
 
-  if (!userName) {
+  if (error ) {
+    return <div>
+      There has an error
+      <pre style={{ whiteSpace:"normal"}}> {error} </pre>
+    </div>
+
+  } else if (!userName) {
     return "Submit user";
   } else if (!user) {
     return <UserFallback userName={userName} />
