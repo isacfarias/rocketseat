@@ -28,20 +28,27 @@ const UserInfo = ({ userName }) => {
 
   }, [userName]);
 
-  if (error ) {
-    return <div>
-      There has an error
-      <pre style={{ whiteSpace:"normal"}}> {error} </pre>
-    </div>
 
-  } else if (!userName) {
-    return "Submit user";
-  } else if (!user) {
-    return <UserFallback userName={userName} />
-  } else {
-     return <UserView user={user} />
+  switch (status) {
+
+    case "idle":
+      return "Submit user";
+
+    case "penddig":
+      return <UserFallback userName={userName} />;
+
+    case "resolved":
+      return <UserView user={user} />;
+
+    case "rejected":
+      return (<div>
+        There has an error
+        <pre style={{ whiteSpace:"normal"}}> {error} </pre>
+      </div>);
+
+    default:
+      throw Error(`Unhandled status: ${status}`);
   }
-
 };
 
 const UserSection = ({ onSelect, userName }) => (
