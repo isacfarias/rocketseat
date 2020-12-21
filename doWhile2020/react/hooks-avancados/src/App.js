@@ -1,75 +1,41 @@
 import * as React from "react";
 import { UserFallback } from "./components/UserFallback";
-import {  UserForm } from "./components/UserForm";
+import { UserForm } from "./components/UserForm";
 import { UserView } from "./components/UserView";
 import { fetchGithubUser } from "./userService";
+import { useAsync, REQUEST_STATUS } from "./regras";
 
-const REQUEST_STATUS = {
-  IDLE:"idle",
-  PENDING:"penddig",
-  RESOLVED:"resolved",
-  REJECTED:"rejected"
-};
 
-const useReducer = (state, action) => {
-  
-  switch (action.type) {
-    case '':
-      break;
-
-    default:
-      break;
-  }
-};
 
 const UserInfo = ({ userName }) => {
 
-  
-  const [state, setState] = React.useState({
-    status: userName ? "penddig" : "idle",
-    user: null,
-    error: null
+  const initialRequestStatus = userName
+  ? REQUEST_STATUS.PENDING
+  : REQUEST_STATUS.IDLE;
+
+  const { status, error, data: user, run } = useAsync({
+    status: initialRequestStatus,
   });
-
-  const [state, dispatch]  = React.useReducer(reducer, initalState);
-
-  const { status, user, error } = state;
 
   React.useEffect(() => {
     if (!userName) return;
-    
-    setState({state: "penddig"});
-
-    return fetchGithubUser(userName).then(
-      (userData) => {
-        setState({state: "resolved", user:userData});
-      },
-      (error) => {
-        setState({state: "rejected", error:error});
-      });
-
-  }, [userName]);
-
+    return run(fetchGithubUser(userName));
+  }, [userName, run]);
 
   switch (status) {
-
-    case "idle":
+    case REQUEST_STATUS.IDLE:
       return "Submit user";
-
-    case "penddig":
-      return <UserFallback userName={userName} />;
-
-    case "resolved":
+    case REQUEST_STATUS.PENDING:
+      return <UserFallback userName={ userName } />;
+    case REQUEST_STATUS.RESOLVED:
       return <UserView user={user} />;
-
-    case "rejected":
+    case REQUEST_STATUS.REJECTED:
       return (<div>
         There has an error
-        <pre style={{ whiteSpace:"normal"}}> {error} </pre>
+        <pre style={{ whiteSpace:"normal"}}> { error } </pre>
       </div>);
-
     default:
-      throw Error(`Unhandled status: ${status}`);
+      throw Error(`Unhandled status: ${ status }`);
   }
 };
 

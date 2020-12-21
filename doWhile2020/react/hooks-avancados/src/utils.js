@@ -1,4 +1,4 @@
-import * as React from "react";
+/*import * as React from "react";
 
 const REQUEST_STATUS = {
   IDLE: "idle",
@@ -94,3 +94,4 @@ const useAsync = (initialState) => {
 };
 
 export { useAsync, REQUEST_STATUS };
+*/
