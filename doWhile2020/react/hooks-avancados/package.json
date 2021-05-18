@@ -3,18 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^5.9.0",
+    "@craco/craco": "^6.1.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "autoprefixer": "^9.8.6",
-    "immer": "^8.0.1",
-    "postcss": "^7.0.35",
+    "@testing-library/user-event": "^13.1.9",
+    "autoprefixer": "^10.2.5",
+    "immer": "^9.0.2",
+    "postcss": "^8.2.15",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
+    "react-scripts": "4.0.3",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "craco start",
