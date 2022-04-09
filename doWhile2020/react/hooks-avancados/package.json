@@ -8,11 +8,12 @@
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^14.0.4",
     "autoprefixer": "^10.3.4",
+    "craco": "^0.0.3",
     "immer": "^9.0.6",
     "postcss": "^8.4.12",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-scripts": "5.0.0",
+    "react-scripts": "^5.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.1",
     "web-vitals": "^2.1.0"
   },
